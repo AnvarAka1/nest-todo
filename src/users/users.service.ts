@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 export type UserListQueryParams = {
   fullnameSearch?: string;
@@ -30,6 +30,8 @@ export const getUsers = async (): Promise<UserType[]> => [
 @Injectable()
 export class UsersService {
   async getUserList(queryParams: UserListQueryParams) {
+    const { fullnameSearch, minAge, maxAge, type, limit } = queryParams;
+
     return await getUsers();
   }
 }
