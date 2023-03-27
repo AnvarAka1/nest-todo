@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getRoot() {
+    return 'Welcome to main page. Please, proceed to `/users` page to see the user list =)';
   }
 }

@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserEntity } from './users/user.entity'
 
 @Module({
   imports: [
@@ -23,11 +24,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        database: configService.get('DB_NAME'),
-        port: configService.get('DB_PORT') || 5432,
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        entities: [path.resolve(__dirname, '**/**/*.entity.{js,ts}')],
+        database: configService.get('DB_NAME', 'user_db'),
+        port: configService.get('DB_PORT', 5432),
+        username: configService.get('DB_USERNAME', 'postgres'),
+        password: configService.get('DB_PASSWORD', ''),
+        entities: [UserEntity],
+        migrations: [path.resolve(__dirname, 'migrations/*.{js,ts}')],
         synchronize: true,
       }),
     }),
