@@ -13,11 +13,7 @@ import { UserEntity } from './users/user.entity'
     UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: path.resolve(
-        __dirname,
-        '..',
-        `.env.${process.env.NODE_ENV || 'development'}`,
-      ),
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
